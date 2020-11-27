@@ -1,2 +1,2 @@
 # spam-filter
-*coworkers: Kamila Houšková*
+*Coworkers: Kamila Houšková, Bohdan Kopčák*
