@@ -6,6 +6,7 @@ PREDFILE = '!prediction.txt'
 
 from utils import read_classification_from_file, write_classification_to_file
 from confmat import BinaryConfusionMatrix
+from simplefilters import NaiveFilter
 
 def quality_score(tp, tn, fp, fn):
     numerator = tp + tn
@@ -29,6 +30,16 @@ def compute_quality_for_corpus(corpus_dir):
                           matrix_dict['fn'])
     
     return score
+    
+#will be testing our filter's quality, once we create one    
+def filter_quality(path):
+    c = NaiveFilter()
+    # path must contain directory \1 for training and \2 for testing
+    c.train(path + r'\1')  
+    c.test(path + r'\2')
+    return compute_quality_for_corpus(path + r'\2')
+ 
+    
 
 
     
