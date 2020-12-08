@@ -25,9 +25,3 @@ class RandomFilter(BaseFilter):
             if not fname.startswith('!'):
                 f.write(fname + " " + random.choice(['HAM', 'SPAM']) + "\n")
         f.close()
-
-if __name__ == "__main__":
-    corpus_dir = 'C:\\Users\\ahoj7\\OneDrive\\Documents\\FEL\\rph\\spam_f\\1'
-    c = RandomFilter()
-    c.train(corpus_dir)
-    c.test(corpus_dir)
