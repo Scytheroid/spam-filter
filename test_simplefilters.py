@@ -3,7 +3,7 @@
 """Tests for simple filters."""
 
 import unittest
-import tst_filterbase
+import test_filterbase
 
 from simplefilters import (
     NaiveFilter,
@@ -11,7 +11,7 @@ from simplefilters import (
     RandomFilter)
 
 
-class NaiveFilterTest(tst_filterbase.BaseFilterTestCase):
+class NaiveFilterTest(test_filterbase.BaseFilterTestCase):
     
     def setUp(self):
         super().setUp()
@@ -19,7 +19,7 @@ class NaiveFilterTest(tst_filterbase.BaseFilterTestCase):
         self.filter = NaiveFilter()
 
 
-class ParanoidFilterTest(tst_filterbase.BaseFilterTestCase):
+class ParanoidFilterTest(test_filterbase.BaseFilterTestCase):
     
     def setUp(self):
         super().setUp()
@@ -27,7 +27,7 @@ class ParanoidFilterTest(tst_filterbase.BaseFilterTestCase):
         self.filter = ParanoidFilter()
 
 
-class RandomFilterTest(tst_filterbase.BaseFilterTestCase):
+class RandomFilterTest(test_filterbase.BaseFilterTestCase):
     
     def setUp(self):
         super().setUp()
