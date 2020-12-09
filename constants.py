@@ -1,0 +1,2 @@
+POSITIVE = "SPAM"
+NEGATIVE = "OK"
