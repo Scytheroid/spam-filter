@@ -1,5 +1,5 @@
-
 import random, os
+from constants import POSITIVE, NEGATIVE
 from basefilter import BaseFilter
 
 class NaiveFilter(BaseFilter):

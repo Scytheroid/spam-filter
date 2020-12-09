@@ -1,5 +1,4 @@
-pos_tag = 'SPAM'
-neg_tag = 'OK'
+from constants import POSITIVE, NEGATIVE
 
 class BinaryConfusionMatrix:
     

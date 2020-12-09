@@ -1,9 +1,7 @@
-POSITIVE = "SPAM"
-NEGATIVE = "OK"
-
 TRUTHFILE = '!truth.txt'
 PREDFILE = '!prediction.txt'
 
+from constants import POSITIVE, NEGATIVE
 from utils import read_classification_from_file, write_classification_to_file
 from confmat import BinaryConfusionMatrix
 from simplefilters import NaiveFilter

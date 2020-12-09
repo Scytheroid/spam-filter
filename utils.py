@@ -1,6 +1,4 @@
-
-POSITIVE = "SPAM"
-NEGATIVE = "OK"
+from constants import POSITIVE, NEGATIVE
 TRUTHFILE = '!truth.txt'
 PREDFILE = '!prediction.txt'
 
