@@ -1,6 +1,5 @@
-from constants import POSITIVE, NEGATIVE
-TRUTHFILE = '!truth.txt'
-PREDFILE = '!prediction.txt'
+
+from constants import POSITIVE, NEGATIVE, TRUTHFILE, PREDFILE
 
 def read_classification_from_file(path):
     classification = dict()
