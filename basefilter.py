@@ -2,7 +2,7 @@
 class BaseFilter:
 
     def train(self, dir_path):
-        pass
+        raise NotImplementedError("Parent filter can't be trained!")
     
     def test(self, dir_path):
         raise NotImplementedError("Parent filter can't be called!")
