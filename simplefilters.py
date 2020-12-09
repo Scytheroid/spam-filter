@@ -21,5 +21,5 @@ class RandomFilter(BaseFilter):
         with open(dir_path + "/!prediction.txt","w+", encoding = "utf-8") as f:
             for fname in os.listdir(dir_path):
                 if not fname.startswith('!'):
-                    f.write(fname + " " + random.choice(['HAM', 'SPAM']) + "\n")
+                    f.write(fname + " " + random.choice([POSITIVE, NEGATIVE]) + "\n")
            
