@@ -20,7 +20,7 @@ def read_only(corpus_dir, which_tag):
     for fname in is_ham.keys():
         if (is_ham[fname] == which_tag):
             with open(rel_path + fname, mode='r', encoding='utf-8') as email:
-                    print(fname, email.read())            
+                    yield fname, email.read()          
 
 if __name__ == '__main__':
     corpus_dir = '1'
