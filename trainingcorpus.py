@@ -6,7 +6,12 @@ class TrainingCorpus:
         self.path_to_mails = path_to_mails
         
     def get_class(self, ename):
-        pass 
+        rel_path = self.path_to_mails + '/'
+        is_ham = read_classification_from_file(rel_path + TRUTHFILE)
+        if (is_ham[ename] == NEGATIVE):
+            return NEGATIVE
+        else:
+            return POSITIVE 
         
     def is_ham(self, ename):
         rel_path = self.path_to_mails + '/'
