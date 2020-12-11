@@ -16,11 +16,11 @@ def write_classification_to_file(clasif, path):
             
 def read_only(corpus_dir, which_tag):
     rel_path = corpus_dir + '/'
-    is_ham = read_classification_from_file(rel_path + TRUTHFILE)
-    for fname in is_ham.keys():
-        if (is_ham[fname] == which_tag):
-            with open(rel_path + fname, mode='r', encoding='utf-8') as email:
-                    yield fname, email.read()          
+    classif_dict = read_classification_from_file(rel_path + TRUTHFILE)
+    for name, classif in classif_dict.items():
+        if classif == which_tag:
+            with open(rel_path + name, mode='r', encoding='utf-8') as email:
+                    yield name, email.read()       
 
 if __name__ == '__main__':
     corpus_dir = '1'
