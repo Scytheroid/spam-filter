@@ -26,11 +26,13 @@ class TrainingCorpus(Corpus):
     def is_spam(self, ename):
         return self.is_tag(ename, POSITIVE) 
     
-    def spams(self):
-        yield read_only(self.path_to_mails, POSITIVE)
-        
     def hams(self):
-        yield read_only(self.path_to_mails, NEGATIVE)
+        hams_only = read_only(self.path_to_mails, NEGATIVE)
+        for ham in hams_only:
+            yield ham           # Returns filename and mail contents
            
-               
-    
+    def spams(self):
+        spams_only = read_only(self.path_to_mails, POSITIVE)
+        for spam in spams_only:
+            yield spam          # Returns filename and mail contents
+        
