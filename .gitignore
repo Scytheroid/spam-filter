@@ -17,3 +17,5 @@ __pycache__/utils.cpython-38.pyc
 .vscode/.ropeproject/config.py
 .vscode/.ropeproject/objectdb
 .README.md.swp
+__pycache__/test_trainingcorpus.cpython-38.pyc
+__pycache__/trainingcorpus.cpython-38.pyc
