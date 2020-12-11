@@ -1,10 +1,10 @@
-
+from corpus import Corpus
 from utils import read_only, read_classification_from_file
 from constants import POSITIVE, NEGATIVE, TRUTHFILE, PREDFILE
 
-class TrainingCorpus:
+class TrainingCorpus(Corpus):
     def __init__(self, path_to_mails):
-        self.path_to_mails = path_to_mails
+        Corpus.__init__(self, path_to_mails)
         
     def is_tag(self, ename, whichtag):
         rel_path = self.path_to_mails + '/'
