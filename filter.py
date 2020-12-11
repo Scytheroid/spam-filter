@@ -20,6 +20,7 @@ class MyFilter:
         
 if __name__ == '__main__':
     c = MyFilter()
+    corpus_dir = '2/'
     c.train(corpus_dir)
     c.test(corpus_dir)
             
