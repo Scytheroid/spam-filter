@@ -1,4 +1,6 @@
 
+import os
+
 from constants import POSITIVE, NEGATIVE, TRUTHFILE, PREDFILE
 from utils import read_classification_from_file, write_classification_to_file
 from confmat import BinaryConfusionMatrix
