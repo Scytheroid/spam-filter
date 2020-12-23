@@ -1,5 +1,7 @@
 import os
+
 from constants import POSITIVE, NEGATIVE
+import ownfilters
 
 class MyFilter:
     def __init__(self):
