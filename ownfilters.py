@@ -2,6 +2,27 @@ from constants import POSITIVE, NEGATIVE
 from basefilter import BaseFilter
 from collections import Counter
 
+class AdvertisementWordFilter(WordFilter):
+    def __init__(self):
+        self.word_in_spams = 0
+        self.word_in_hams = 0
+        self.word_total = 0
+
+    def train(self, corpus):
+        raise NotImplementedError
+
+    def test(self, mail):
+        mail.lower()
+        if mail.find("advertisement") != -1:
+            return self.bayes()
+        else:
+            return -1
+
+    def bayes(self):
+        return self.word_in_spams / (self.word_in_spams + self.word_in_hams)
+
+    
+
 class HasWordFilter(BaseFilter):
 
     # parses corpus of the email into words, turns all upper letters
