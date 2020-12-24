@@ -1,7 +1,7 @@
 ﻿import os
 class BaseFilter:
 
-    def train(self, dir_path):
+    def train(self, corpus):
         pass
     
     def test(self, mail):
