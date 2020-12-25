@@ -20,7 +20,7 @@ def read_only(corpus_dir, which_tag):
     for name, classif in classif_dict.items():
         if classif == which_tag:
             with open(rel_path + name, mode='r', encoding='utf-8') as email:
-                    yield name, email.read()       
+                    yield name, email.read()   
 
 if __name__ == '__main__':
     corpus_dir = '1'
