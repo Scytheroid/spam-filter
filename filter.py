@@ -35,13 +35,17 @@ class MyFilter:
         
         for name, mail in corpus.emails():
             score = 0
+            tests_done = 0
 
             for filt in self.filters:
                 print("Testing " + name + " with " + filt.__name__)
                 result = filt.test(mail)
                 print("Result is: " + result)
-                score += result
-            score /= len(self.filters)
+                if result != -1:
+                    score += result
+                    tests_done += 1
+                    
+            score /= tests_done
 
             if score > POSITIVITY_THRESHOLD:
                 clasif[name] = POSITIVE
