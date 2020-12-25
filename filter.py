@@ -1,7 +1,7 @@
 import os
 import inspect
 
-from constants import POSITIVE, NEGATIVE
+from constants import POSITIVE, NEGATIVE, POSITIVITY_THRESHOLD
 from corpus import Corpus
 import ownfilters
 import utils
@@ -34,12 +34,19 @@ class MyFilter:
         clasif = dict()
         
         for name, mail in corpus.emails():
+            score = 0
+
             for filt in self.filters:
                 print("Testing " + name + " with " + filt.__name__)
                 result = filt.test(mail)
                 print("Result is: " + result)
-            clasif[name] = POSITIVE
-        
+                score += result
+            score /= len(self.filters)
+
+            if score > POSITIVITY_THRESHOLD:
+                clasif[name] = POSITIVE
+            else:
+                clasif[name] = NEGATIVE        
         utils.write_classification_to_file(clasif, dir_path + "/!prediction.txt")
                     
             
