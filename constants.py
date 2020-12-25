@@ -2,3 +2,4 @@ POSITIVE = "SPAM"
 NEGATIVE = "OK"
 TRUTHFILE = '!truth.txt'
 PREDFILE = '!prediction.txt'
+POSITIVITY_THRESHOLD = 0.80
