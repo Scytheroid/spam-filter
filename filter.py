@@ -3,6 +3,7 @@ import inspect
 
 from constants import POSITIVE, NEGATIVE, POSITIVITY_THRESHOLD
 from corpus import Corpus
+from trainingcorpus import TrainingCorpus
 import ownfilters
 import utils
 
@@ -23,7 +24,7 @@ class MyFilter:
                     self.filters.append(filt)
     
     def train(self, dir_path):
-        corpus = Corpus(dir_path)
+        corpus = TrainingCorpus(dir_path)
 
         for filt in self.filters:
             print("Training " + filt.__name__)
