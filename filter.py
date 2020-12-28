@@ -20,14 +20,14 @@ class MyFilter:
             if inspect.isclass(obj):
                 if obj.__module__ == "ownfilters":
                     print("Initializing " + name)
-                    filt = obj.__init__(obj)
+                    filt = obj()
                     self.filters.append(filt)
     
     def train(self, dir_path):
         corpus = TrainingCorpus(dir_path)
 
         for filt in self.filters:
-            print("Training " + filt.__name__)
+            print("Training " + filt.__class__.__name__)
             filt.train(corpus)
 
     def test(self, dir_path):
@@ -57,6 +57,6 @@ class MyFilter:
             
 if __name__ == '__main__':
     filt = MyFilter()
-    corpus_dir = '2/'
+    corpus_dir = '1/'
     filt.train(corpus_dir)
             
