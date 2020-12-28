@@ -22,6 +22,36 @@ class BlacklistFilter(BaseFilter):
             return 1    # Positive
         else:
             return -1    # Can't tell
+            
+class HtmlFilter(BaseFilter):
+    def __init__(self):
+        self.html_in_ham = 2
+        self.html_in_spam = 8
+
+    def train(self, t_corpus):
+        self.html_in_ham = 0
+        self.html_in_spam = 0
+        for name, email in t_corpus.emails():
+            words = []
+            for word in email.split():
+                words.append(word.lower())
+            for word in words:
+                if word.startswith('<') and word.endswith('>'):
+                    if t_corpus.is_spam(name):
+                        self.html_in_spam += 1
+                    elif t_corpus.is_ham(name):
+                        self.html_in_ham += 1
+
+    def test(self, mail):
+        found = 0
+        words = []
+        for word in mail.split():
+            words.append(word.lower())
+        for word in words:
+            if word.startswith('<') and word.endswith('>'):
+                return self.html_in_spam / (self.html_in_spam + self.html_in_ham)
+        if found == 0:
+            return -1
 
 
 """ ! ! ! WORD FILTERS ! ! ! """
@@ -223,9 +253,11 @@ class WonFilter(WordFilter):
         
 if __name__ == "__main__":
     
-    a = WonFilter()
+    a = HtmlFilter()
     c = TrainingCorpus('./1')
+    b = '<TABLE width=3D500> \
+  <TBODY> \
+  <TR>'
     a.train(c)
-    print(a.word_in_hams)
-    print(a.word_in_spams)
+    print(a.test(b))
     
