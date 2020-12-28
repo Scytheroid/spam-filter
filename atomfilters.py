@@ -57,14 +57,11 @@ class HtmlFilter(BaseFilter):
             words.append(word.lower())
         for word in words:
             if word.startswith('<') and word.endswith('>'):
-                found += 1
-        if found == 0:
-            return -1
-        else:
-            '''Naive Bayes spam filtering method'''
-            return (self.html_in_spam * self.mail_is_spam) / \
-        (self.html_in_spam * self.mail_is_spam + self.html_in_ham * self.mail_is_ham)
-
+                '''Naive Bayes spam filtering method'''
+                return (self.html_in_spam * self.mail_is_spam) / \
+                (self.html_in_spam * self.mail_is_spam + self.html_in_ham \
+                * self.mail_is_ham)
+        return -1
         
 if __name__ == "__main__":
     
