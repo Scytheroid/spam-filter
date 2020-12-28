@@ -16,7 +16,6 @@ class WordFilter(BaseFilter):
     def __init__(self, word):
         self.word_in_spams = 0
         self.word_in_hams = 0
-        self.word_total = 0
         self.word = word
         self.mail_is_spam = 1
         self.mail_is_ham = 1
@@ -44,7 +43,6 @@ class WordFilter(BaseFilter):
     def test(self, mail):
         mail.lower()
         if mail.find(self.word) != -1:
-            self.word_total = self.word_in_hams + self.word_in_spams
             return self.bayes()
         else:
             return -1
