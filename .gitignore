@@ -19,3 +19,5 @@ __pycache__/utils.cpython-38.pyc
 .README.md.swp
 __pycache__/test_trainingcorpus.cpython-38.pyc
 __pycache__/trainingcorpus.cpython-38.pyc
+__pycache__/ownfilters.cpython-38.pyc
+__pycache__/test_ownfilters.cpython-38.pyc
