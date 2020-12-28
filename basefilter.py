@@ -12,7 +12,7 @@ class BaseFilter:
     # tests how many times a word has appeared in hams and in spams, then 
     # computes by Bayes the probabilityof mail containing the word being a spam
     # called from ownfilters.py
-class WordFilter:
+class WordFilter(BaseFilter):
     def __init__(self, word):
         self.word_in_spams = 0
         self.word_in_hams = 0
