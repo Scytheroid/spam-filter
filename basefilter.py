@@ -18,8 +18,16 @@ class WordFilter(BaseFilter):
         self.word_in_hams = 0
         self.word_total = 0
         self.word = word
+        self.mail_is_spam = 1
+        self.mail_is_ham = 1
 
     def train(self, t_corpus):
+        if self.mail_is_spam == 1:
+            for name, email in t_corpus.emails():
+                if t_corpus.is_spam(name):
+                    self.mail_is_spam += 1
+                else:
+                    self.mail_is_ham += 1                   
         for name, email in t_corpus.emails():
             words = []
             for word in email.split():
@@ -42,7 +50,9 @@ class WordFilter(BaseFilter):
             return -1
 
     def bayes(self):
-        return self.word_in_spams / (self.word_in_spams + self.word_in_hams)
+        '''Naive Bayes spam filtering method'''
+        return (self.word_in_spams * self.mail_is_spam) / \
+        (self.word_in_spams * self.mail_is_spam + self.word_in_hams * self.mail_is_ham)
 
 if __name__ == "__main__":
     pass
