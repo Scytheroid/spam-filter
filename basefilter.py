@@ -20,7 +20,7 @@ class WordFilter(BaseFilter):
         self.word = word.lower()
         self.bayes_val = -1
 
-    def train(self, t_corpus):
+    def train(self, t_corpus):                 
         for name, email in t_corpus.emails():
             email.lower()
             if self.word in email:
