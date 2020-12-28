@@ -3,7 +3,7 @@ from collections import Counter
 
 class BaseFilter:
 
-    def train(self, corpus):
+    def train(self, training_corpus):
         pass
     
     def test(self, mail):
