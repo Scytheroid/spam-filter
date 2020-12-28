@@ -1,19 +1,34 @@
 from constants import POSITIVE, NEGATIVE
 from basefilter import BaseFilter
 from collections import Counter
+from corpus import Corpus
+from trainingcorpus import TrainingCorpus
 
-class AdvertisementWordFilter(WordFilter):
+class AdvertisementWordFilter(): #WordFilter
     def __init__(self):
         self.word_in_spams = 0
         self.word_in_hams = 0
         self.word_total = 0
 
     def train(self, corpus):
-        raise NotImplementedError
+        t = TrainingCorpus(corpus.path_to_mails)
+        for name, email in corpus.emails():
+            words = []
+            for word in email.split():
+                words.append(word.lower())
+            counter = Counter(words)
+            total_in_mail = sum(counter.values())
+            if t.is_spam(name):
+                self.word_in_spams += total_in_mail
+            elif t.is_ham(name):
+                self.word_in_hams += total_in_mail
+            else:
+                print("isn't a name of email")
 
     def test(self, mail):
         mail.lower()
         if mail.find("advertisement") != -1:
+            self.word_total = self.word_in_hams + self.word_in_spams
             return self.bayes()
         else:
             return -1
@@ -63,5 +78,7 @@ if __name__ == "__main__":
     l = HasWordFilter(email)
     wordiis = []
     print(l.spam_words())
-    
+    a = AdvertisementWordFilter()
+    c = Corpus('./1')
+    a.train(c)
     
