@@ -4,7 +4,7 @@ import inspect
 from constants import POSITIVE, NEGATIVE, POSITIVITY_THRESHOLD
 from corpus import Corpus
 from trainingcorpus import TrainingCorpus
-import ownfilters, wordfilters
+import atomfilters, wordfilters
 import utils
 
 class MyFilter:
@@ -75,6 +75,6 @@ if __name__ == '__main__':
     print("Score of {name} is {score:3.2f}".format(name=filt.__class__.__name__, score=score))
 
     # from quality import test_atom_filter
-    # atom_filter = ownfilters.BlacklistFilter()
+    # atom_filter = atomfilters.BlacklistFilter()
     # score = test_atom_filter(atom_filter, train_dir, test_dir)
     # print("Score of {name} is {score:3.2f}".format(name=atom_filter.__class__.__name__, score=score))
