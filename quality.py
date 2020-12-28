@@ -29,7 +29,7 @@ def compute_quality_for_corpus(corpus_dir):
     
     return score
     
-#will be testing our filter's quality, once we create one    
+# will be testing our filter's quality, once we create one    
 def filter_quality(path):
     c = NaiveFilter()
     # path must contain directory /1 for training and /2 for testing
@@ -38,8 +38,3 @@ def filter_quality(path):
     f_quality = compute_quality_for_corpus(path + r'/2')
     os.remove(path + r'/2/' + PREDFILE)
     return f_quality
- 
-    
-
-
-    

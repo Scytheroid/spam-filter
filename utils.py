@@ -1,5 +1,10 @@
 
-from constants import POSITIVE, NEGATIVE, TRUTHFILE, PREDFILE
+from constants import POSITIVE, NEGATIVE, TRUTHFILE, PREDFILE, POSITIVITY_THRESHOLD
+from basefilter import BaseFilter
+from corpus import Corpus
+from trainingcorpus import TrainingCorpus
+import confmat
+import quality
 
 def read_classification_from_file(path):
     classification = dict()
@@ -21,6 +26,37 @@ def read_only(corpus_dir, which_tag):
         if classif == which_tag:
             with open(rel_path + name, mode='r', encoding='utf-8') as email:
                     yield name, email.read()   
+
+def test_atom_filter(initialized_filter, train_dir, test_dir):
+    train_corp = TrainingCorpus(train_dir)
+    test_corp = Corpus(test_dir)
+    
+    filter = initialized_filter
+    filter.train(train_corp)
+    prediction = dict()
+
+    for name, mail in test_corp.emails():
+        result = filter.test(mail)
+        if result == -1:
+            continue
+        elif result > POSITIVITY_THRESHOLD:
+            prediction[name] = POSITIVE
+        else:
+            result[name] = NEGATIVE
+
+    truth = read_classification_from_file(test_dir + '/' + TRUTHFILE)
+    conf_matrix = confmat.BinaryConfusionMatrix(POSITIVE, NEGATIVE)
+    conf_matrix.compute_from_dicts(truth, prediction)
+
+    matrix_dict = conf_matrix.as_dict()
+    
+    score = quality.quality_score(matrix_dict['tp'], \
+                          matrix_dict['tn'], \
+                          matrix_dict['fp'], \
+                          matrix_dict['fn'])
+    
+    return score
+
 
 if __name__ == '__main__':
     corpus_dir = '1'

@@ -33,7 +33,7 @@ class BinaryConfusionMatrix:
         return {"tp" : self.tp, "tn" : self.tn, "fp" : self.fp, "fn" : self.fn}   
         
     def compute_from_dicts(self, truth_dict, pred_dict):
-        for email in truth_dict.keys():
+        for email in pred_dict.keys():
             self.update(truth_dict[email], pred_dict[email])  
         return self.as_dict                                                      
               
