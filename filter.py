@@ -4,7 +4,7 @@ import inspect
 from constants import POSITIVE, NEGATIVE, POSITIVITY_THRESHOLD
 from corpus import Corpus
 from trainingcorpus import TrainingCorpus
-import ownfilters
+import ownfilters, wordfilters
 import utils
 
 class MyFilter:
@@ -12,21 +12,23 @@ class MyFilter:
         # self.filter_importance = 2
         # initializing importance of our filters in case they don't let us
         # train them
-        self.filters = []
+        self.word_filters = []
         self.init_filters()
 
     def init_filters(self):
-        for name, obj in inspect.getmembers(ownfilters):
+
+        # Initialize wordfilters
+        for name, obj in inspect.getmembers(wordfilters):
             if inspect.isclass(obj):
-                if obj.__module__ == "ownfilters":
+                if obj.__module__ == "wordfilters":
                     print("Initializing " + name)
                     filt = obj()
-                    self.filters.append(filt)
+                    self.word_filters.append(filt)
     
     def train(self, dir_path):
         corpus = TrainingCorpus(dir_path)
 
-        for filt in self.filters:
+        for filt in self.word_filters:
             print("Training " + filt.__class__.__name__)
             filt.train(corpus)
 
@@ -38,25 +40,41 @@ class MyFilter:
             score = 0
             tests_done = 0
 
-            for filt in self.filters:
-                print("Testing " + name + " with " + filt.__name__)
+            for filt in self.word_filters:
+                print("Testing " + name + " with " + filt.__class__.__name__)
                 result = filt.test(mail)
-                print("Result is: " + result)
+                print("Score of {name} calculated by {test} is {score:3.2f}".format(name=name, test=filt.__class__.__name__, score=result))
                 if result != -1:
                     score += result
                     tests_done += 1
-                    
-            score /= tests_done
 
-            if score > POSITIVITY_THRESHOLD:
+            if tests_done == 0:
+                print("No tests were done")
+                clasif[name] = POSITIVE     
+            elif score / tests_done > POSITIVITY_THRESHOLD:
                 clasif[name] = POSITIVE
             else:
-                clasif[name] = NEGATIVE        
+                clasif[name] = NEGATIVE
+
         utils.write_classification_to_file(clasif, dir_path + "/!prediction.txt")
                     
             
 if __name__ == '__main__':
+    import quality
+    train_dir = '1/'
+    test_dir = '2/'
+
+    # filt = wordfilters.WinFilter()
+    # conf_matrix = quality.test_atom_filter(filt, train_dir, test_dir)
+    # print(conf_matrix)
+
     filt = MyFilter()
-    corpus_dir = '1/'
-    filt.train(corpus_dir)
-            
+    filt.train(train_dir)
+    filt.test(test_dir)
+    score = quality.compute_quality_for_corpus(test_dir)
+    print("Score of {name} is {score:3.2f}".format(name=filt.__class__.__name__, score=score))
+
+    # from quality import test_atom_filter
+    # atom_filter = ownfilters.BlacklistFilter()
+    # score = test_atom_filter(atom_filter, train_dir, test_dir)
+    # print("Score of {name} is {score:3.2f}".format(name=atom_filter.__class__.__name__, score=score))
