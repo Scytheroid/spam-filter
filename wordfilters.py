@@ -7,6 +7,22 @@ from basefilter import WordFilter
 class PercentFilter(WordFilter):
     def __init__(self):
         WordFilter.__init__(self, '%')
+        
+class BuyFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'buy')
+
+class InheritFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'inherit')
+
+class HeritageFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'heritage')
+        
+class SaleFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'sale')
 
 class SubscriberFilter(WordFilter):
     def __init__(self):
