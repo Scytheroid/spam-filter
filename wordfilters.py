@@ -12,9 +12,17 @@ class BuyFilter(WordFilter):
     def __init__(self):
         WordFilter.__init__(self, 'buy')
                 
+class Cost(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'cost')
+        
 class Game(WordFilter):
     def __init__(self):
-        WordFilter.__init__(self, 'game')
+        WordFilter.__init__(self, 'game')      
+        
+class Insurance(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'insurance')
         
 class Play(WordFilter):
     def __init__(self):
