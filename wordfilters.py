@@ -16,6 +16,26 @@ class Cost(WordFilter):
     def __init__(self):
         WordFilter.__init__(self, 'cost')
         
+class Poker(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'poker')
+        
+class Gamble(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'gamble')
+        
+class Gambling(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'gambling')
+        
+class SignUp(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'sign up')
+        
+class CustomerService(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'customer service')
+        
 class Game(WordFilter):
     def __init__(self):
         WordFilter.__init__(self, 'game')      
