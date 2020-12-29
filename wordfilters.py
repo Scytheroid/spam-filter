@@ -11,6 +11,78 @@ class NigerianPrinceFilter(WordFilter):
 class PercentFilter(WordFilter):
     def __init__(self):
         WordFilter.__init__(self, '%')
+        
+class BuyFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'buy')
+                
+class Cost(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'cost')
+        
+class Poker(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'poker')
+        
+class Gamble(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'gamble')
+        
+class Gambling(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'gambling')
+        
+class SignUp(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'sign up')
+        
+class CustomerService(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'customer service')
+        
+class Game(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'game')      
+        
+class Insurance(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'insurance')
+        
+class Play(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'play')
+                
+class CassinoFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'cassino')
+        
+class BankAccountFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'bank account')
+        
+class OccasionFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'occasion')
+        
+class PayFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'pay')
+        
+class Password(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'password')
+
+class InheritFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'inherit')
+
+class HeritageFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'heritage')
+        
+class SaleFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'sale')
 
 class SubscriberFilter(WordFilter):
     def __init__(self):
