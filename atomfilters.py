@@ -49,15 +49,8 @@ class HtmlFilter(BaseFilter):
         self.bayes = 0.86
         
     def return_body(self, mail, seperator):
-        parts, words = [], []
-        for part in mail.split('\n\n'):
-            parts.append(part)
-          # getting rid of e-mail header, where some elements resemble
-          # HTML syntax
-        del parts[0]
-            # Join all the strings in list
-        final_body = seperator.join(parts)    
-        return final_body
+        body = email.message_from_string(mail).get_payload()
+        return body
 
     def train(self, t_corpus):
         self.html_in_ham = 0
