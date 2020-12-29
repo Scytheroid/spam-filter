@@ -23,6 +23,8 @@ def compute_quality_for_corpus(corpus_dir):
     conf_matrix.compute_from_dicts(truth_clasf, pred_clasf)
 
     matrix_dict = conf_matrix.as_dict()
+    # Testing purposes
+    print(matrix_dict)
     
     score = quality_score(matrix_dict['tp'], \
                           matrix_dict['tn'], \
@@ -30,7 +32,6 @@ def compute_quality_for_corpus(corpus_dir):
                           matrix_dict['fn'])
     
     return score
-    
 # will be testing our filter's quality, once we create one    
 def filter_quality(path):
     c = NaiveFilter()
@@ -56,13 +57,15 @@ def test_atom_filter(initialized_filter, train_dir, test_dir):
         elif result > POSITIVITY_THRESHOLD:
             prediction[name] = POSITIVE
         else:
-            result[name] = NEGATIVE
+            prediction[name] = NEGATIVE
 
     truth = read_classification_from_file(test_dir + '/' + TRUTHFILE)
     conf_matrix = BinaryConfusionMatrix(POSITIVE, NEGATIVE)
     conf_matrix.compute_from_dicts(truth, prediction)
 
     matrix_dict = conf_matrix.as_dict()
+    # For testing purposes
+    print(matrix_dict)
     
     score = quality_score(matrix_dict['tp'], \
                           matrix_dict['tn'], \
