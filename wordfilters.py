@@ -4,6 +4,30 @@ from basefilter import WordFilter
     # analysis of words usually appearing in spams 
     # list of words we used is from: 
     # https://www.inc.com/geoffrey-james/how-to-avoid-a-spam-filter-5-rules.html
+class PercentFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, '%')
+
+class SubscriberFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'subscriber')
+
+class SmokingFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'smoking')
+
+class TobaccoFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'tobacco')
+
+class OrderFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'order')
+
+class OrderNowFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'order now')
+
 class AdvertisementFilter(WordFilter):
     def __init__(self):
         WordFilter.__init__(self, 'advertisement')
