@@ -1,5 +1,7 @@
 
-from constants import POSITIVE, NEGATIVE, TRUTHFILE, PREDFILE, POSITIVITY_THRESHOLD
+from constants import POSITIVE, NEGATIVE, TRUTHFILE, PREDFILE
+
+    '''USEFUL FUNCTIONS THAT WORK WITH FILES.'''
 
 def read_classification_from_file(path):
     classification = dict()
@@ -15,6 +17,7 @@ def write_classification_to_file(clasif, path):
             file.write(mail + ' ' + result + '\n')
             
 def read_only(corpus_dir, which_tag):
+    '''PRINTS ALL MAILS WITH GIVEN TAG.'''
     rel_path = corpus_dir + '/'
     classif_dict = read_classification_from_file(rel_path + TRUTHFILE)
     for name, classif in classif_dict.items():
@@ -23,6 +26,7 @@ def read_only(corpus_dir, which_tag):
                     yield name, email.read()   
 
 def show_mismatched(corpus_dir):
+    '''DISCOVERS MAILS WE DIDN'T CLASSIFY WELL AND PRINTS THEM OUT.'''
     rel_path = corpus_dir + '/'
     truth_dict = read_classification_from_file(rel_path + TRUTHFILE)
     pred_dict = read_classification_from_file(rel_path + PREDFILE)

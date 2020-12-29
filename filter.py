@@ -8,7 +8,11 @@ import atomfilters, wordfilters
 import utils
 
 class MyFilter:
-    '''COMBINES ALL OUR FILTERS TO GET THE BEST RESULTS POSSIBLE.'''
+    ''' ONE FILTER TO RULE THEM ALL,
+        ONE FILTER TO FIND THEM,
+        ONE FILTER TO BRING THEM ALL,
+        AND IN THE DARKNESS BIND THEM.'''
+        
     def __init__(self):
         self.strong_filters = []
         self.normal_filters = []
