@@ -73,7 +73,7 @@ class MyFilter:
 
             if tests_done == 0:
                 no_tests_done += 1
-                print("No tests were done for " + name)
+                # print("No tests were done for " + name)
                 clasif[name] = NEGATIVE 
             elif score / tests_done > POSITIVITY_THRESHOLD:
                 clasif[name] = POSITIVE
@@ -83,8 +83,8 @@ class MyFilter:
                 clasif[name] = NEGATIVE
 
         utils.write_classification_to_file(clasif, dir_path + "/!prediction.txt")
-        print("No tests done: {}".format(no_tests_done))
-        print("Are rather positive but not tagged: {}".format(rather_positive))
+        # print("No tests done: {}".format(no_tests_done))
+        # print("Are rather positive but not tagged: {}".format(rather_positive))
 
     def test_strong_filters(self, name, mail):
         for filt in self.strong_filters:
@@ -105,7 +105,6 @@ class MyFilter:
         for filt in self.normal_filters:
             # print("Testing " + name + " with " + filt.__class__.__name__)
             result = filt.test(mail)
-            # print("Score of {name} calculated by {test} is {score:3.2f}".format(name=name, test=filt.__class__.__name__, score=result))
             if result != -1:
                 score += result
                 tests_done += 1
@@ -115,9 +114,7 @@ class MyFilter:
         score = 0
         tests_done = 0
         for filt in self.word_filters:
-                # print("Testing " + name + " with " + filt.__class__.__name__)
                 result = filt.test(mail)
-                # print("Score of {name} calculated by {test} is {score:3.2f}".format(name=name, test=filt.__class__.__name__, score=result))
                 if result != -1:
                     score += result
                     tests_done += 1
@@ -138,4 +135,4 @@ if __name__ == '__main__':
     filt.test(test_dir)
     # utils.show_mismatched(test_dir)
     score = quality.compute_quality_for_corpus(test_dir)
-    print("Score of {name} is {score:3.2f}".format(name=filt.__class__.__name__, score=score))
+    print("Score for {constant} is {score:3.2f}".format(constant=POSITIVITY_THRESHOLD, score=score))
