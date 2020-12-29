@@ -25,6 +25,7 @@ class BlacklistFilter(BaseFilter):
             
 class HtmlFilter(BaseFilter):
     def __init__(self):
+        # default parameters, in case we didn't call the train function
         self.html_in_ham = 2
         self.html_in_spam = 8
         self.bayes = 0.86
@@ -52,23 +53,21 @@ class HtmlFilter(BaseFilter):
                         self.html_in_spam += 1
                     elif t_corpus.is_ham(name):
                         self.html_in_ham += 1
+        self.bayes = self.html_in_spam / (self.html_in_spam + self.html_in_ham)
 
     def test(self, mail):
         separator = ' '
         body = self.return_body(mail, separator)
         for word in body.split():
             if word.startswith('<') and word.endswith('>'):
-                '''Naive Bayes spam filtering method'''
-                return self.html_in_spam / (self.html_in_spam + self.html_in_ham)
+                return self.bayes
         return -1
         
 if __name__ == "__main__":
     
     a = HtmlFilter()
     c = TrainingCorpus('./1')
-    b = '<TABLE width=3D500> \n\n <TBODY <TR/> '
     a.train(c)
     print(a.html_in_ham)
     print(a.html_in_spam)
-    print(a.test(b))
     
