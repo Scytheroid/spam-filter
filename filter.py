@@ -24,6 +24,7 @@ class MyFilter:
         # print("Initializing WhiteListFilter")
         self.strong_filters.append(atomfilters.WhitelistFilter())
         self.strong_filters.append(atomfilters.ReplyFilter())
+        self.strong_filters.append(atomfilters.XSpamStatusFilter())
 
         # Initialize normal filters
         # self.normal_filters.append(atomfilters.HtmlFilter())
@@ -126,7 +127,7 @@ if __name__ == '__main__':
     train_dir = '1/'
     test_dir = '2/'
 
-    # filt = wordfilters.NigerianPrinceFilter()
+    # filt = atomfilters.XSpamStatusFilter()
     # score = quality.test_atom_filter(filt, train_dir, test_dir)
     # print("Score of {name} is {score:3.2f}".format(name=filt.__class__.__name__, score=score))
 
