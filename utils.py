@@ -25,7 +25,7 @@ def read_only(corpus_dir, which_tag):
 def show_mismatched(corpus_dir):
     rel_path = corpus_dir + '/'
     truth_dict = read_classification_from_file(rel_path + TRUTHFILE)
-    pred_dict = read_classification_from_file(rel_path + '/' + PREDFILE)
+    pred_dict = read_classification_from_file(rel_path + PREDFILE)
     for name, classif in truth_dict.items():
         if classif != pred_dict[name]:
             print("Mismatch found in file {}!".format(name))
@@ -33,7 +33,7 @@ def show_mismatched(corpus_dir):
             with open(rel_path + name, mode='r', encoding='utf-8') as email:
                 print(email.read())
             print("\n")
-        a = input()
+        input()
 
 if __name__ == '__main__':
     corpus_dir = '1'

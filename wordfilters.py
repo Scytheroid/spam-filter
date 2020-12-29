@@ -1,10 +1,12 @@
 from basefilter import WordFilter
 
 ''' WORD SPECIFIC FILTERS '''
-    # analysis of words usually appearing in spams 
-    # list of some of the words we used is from: 
+    # analysis of words usually appearing in spams
+
+    # some of the words we used are from: 
     # https://www.inc.com/geoffrey-james/how-to-avoid-a-spam-filter-5-rules.html
-    # we addes pre-calculated bayes in case train() wasn't called
+    
+    # we use pre-calculated bayes in case train() wasn't called
     
 class CostFilter(WordFilter):
     def __init__(self):
@@ -50,11 +52,6 @@ class BuyFilter(WordFilter):
     def __init__(self):
         WordFilter.__init__(self, 'buy')
         self.bayes_val = 0.79
-                
-class CostFilter(WordFilter):
-    def __init__(self):
-        WordFilter.__init__(self, 'cost')
-        self.bayes_val = 0.8
         
 class PokerFilter(WordFilter):
     def __init__(self):
@@ -184,7 +181,7 @@ class CommodityFilter(WordFilter):
 class CongratulationsFilter(WordFilter):
     def __init__(self):
         WordFilter.__init__(self, 'congratulations')
-        self.bayes_val = -1
+        self.bayes_val = 0.8
         
 class CreditFilter(WordFilter):
     def __init__(self):
@@ -395,5 +392,3 @@ class WonFilter(WordFilter):
     def __init__(self):
         WordFilter.__init__(self, 'won')
         self.bayes_val = 0.77
-
-    
