@@ -1,7 +1,7 @@
 import os
-from collections import Counter
 
 class BaseFilter:
+    '''GIVES THE BASIS TO ALL FILTERS.'''
     def __init__(self):
         self.is_trained = False
 
@@ -11,10 +11,11 @@ class BaseFilter:
     def test(self, mail):
         raise NotImplementedError("Parent filter can't be called!")
         
-    # tests how many times a word has appeared in hams and in spams, then 
-    # computes by Bayes the probabilityof mail containing the word being a spam
-    # called from atomfilters.py
+
 class WordFilter(BaseFilter):
+    '''DETECTS HOW GIVEN WORD INFLUENCES FILTERS PROBABILITY OF BEING A SPAM.'''
+    
+    # called from atomfilters.py
     def __init__(self, word):
         BaseFilter.__init__(self)
         self.word_in_spams = 0
@@ -23,6 +24,8 @@ class WordFilter(BaseFilter):
         self.word = word.lower()
         self.bayes_val = -1
 
+    # tests how many times a word has appeared in hams and in spams, then 
+    # computes by Bayes the probabilityof mail containing the word being a spam
     def train(self, t_corpus):                
         for name, email in t_corpus.emails():
             email.lower()

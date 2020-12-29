@@ -8,6 +8,7 @@ import atomfilters, wordfilters
 import utils
 
 class MyFilter:
+    '''COMBINES ALL OUR FILTERS TO GET THE BEST RESULTS POSSIBLE.'''
     def __init__(self):
         # self.filter_importance = 2
         # initializing importance of our filters in case they don't let us
@@ -132,7 +133,7 @@ if __name__ == '__main__':
     # print("Score of {name} is {score:3.2f}".format(name=filt.__class__.__name__, score=score))
 
     filt = MyFilter()
-    filt.train(train_dir)
+   # filt.train(train_dir)
     filt.test(test_dir)
     # utils.show_mismatched(test_dir)
     score = quality.compute_quality_for_corpus(test_dir)
