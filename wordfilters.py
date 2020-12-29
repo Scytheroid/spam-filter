@@ -4,6 +4,10 @@ from basefilter import WordFilter
     # analysis of words usually appearing in spams 
     # list of words we used is from: 
     # https://www.inc.com/geoffrey-james/how-to-avoid-a-spam-filter-5-rules.html
+class NigerianPrinceFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'nigerian prince')
+
 class PercentFilter(WordFilter):
     def __init__(self):
         WordFilter.__init__(self, '%')
