@@ -142,6 +142,35 @@ class SusReplyFilter(BaseFilter):
             return self.sus_bayes
         else:
             return -1
+
+class XSpamStatusFilter(BaseFilter):
+    def __init__(self):
+        BaseFilter.__init__(self)
+        self.tagged_positives = 0
+        self.tagged_negatives = 0
+        self.bayes_val = -1
+        
+    def train(self, training_corpus):
+        for fname, mail in training_corpus.emails():
+            XSS_header = email.message_from_string(mail).get('X-Spam-Status')
+            if XSS_header != None:
+                if XSS_header.split(', ')[0] == 'No':
+                    if training_corpus.is_ham(fname):
+                        self.tagged_positives += 1
+                    else:
+                        self.tagged_negatives += 1
+        if self.tagged_positives + self.tagged_negatives > 0:
+            self.bayes_val = self.bayes()
+
+    def test(self, mail):
+        XSS_header = email.message_from_string(mail).get('X-Spam-Status')
+        if XSS_header != None:
+                if XSS_header.split(', ')[0] == 'No':
+                    return self.bayes_val
+        return -1
+
+    def bayes(self):
+        return self.tagged_negatives / (self.tagged_negatives + self.tagged_positives)
         
 if __name__ == "__main__":
     
