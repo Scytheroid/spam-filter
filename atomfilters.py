@@ -6,6 +6,7 @@ from trainingcorpus import TrainingCorpus
 import email.message
 
 class BlacklistFilter(BaseFilter):
+    """DETECTS MAIL ADRESSES THAT USUALLY SEND SPAMS"""
     def __init__(self):
         BaseFilter.__init__(self)
         self.blacklist = set()
@@ -24,6 +25,7 @@ class BlacklistFilter(BaseFilter):
             return -1    # Can't tell
 
 class WhitelistFilter(BaseFilter):
+    """DETECTS MAIL ADRESSES THAT USUALLY SEND HAMS"""
     def __init__(self):
         BaseFilter.__init__(self)
         self.whitelist = set()
@@ -42,6 +44,7 @@ class WhitelistFilter(BaseFilter):
             return -1    # Can't tell
 
 class HtmlFilter(BaseFilter):
+    """DETECTS WHETER BODY CONTAINS HTML TAGS"""
     def __init__(self):
         # default parameters, in case we didn't call the train function
         self.html_in_ham = 2
@@ -75,6 +78,7 @@ class HtmlFilter(BaseFilter):
         return -1
         
 class ReplyFilter(BaseFilter):
+    """FINDS MAILS THAT ARE REPLYS TO OUR MAIL"""
     def __init__(self):
         # default parameters, in case we didn't call the train function
         self.reply_in_ham = 0
@@ -107,6 +111,7 @@ class ReplyFilter(BaseFilter):
             return -1
             
 class SusReplyFilter(BaseFilter):
+    """DETECTS MAILS PRETENDING TO BE A REPLY"""
     def __init__(self):
         # default parameters, in case we didn't call the train function
         self.sus_reply_in_ham = 0
