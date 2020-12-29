@@ -43,55 +43,49 @@ class WhitelistFilter(BaseFilter):
 
 class HtmlFilter(BaseFilter):
     def __init__(self):
-        BaseFilter.__init__(self)
+        # default parameters, in case we didn't call the train function
         self.html_in_ham = 2
         self.html_in_spam = 8
-        self.mail_is_spam = 1
-        self.mail_is_ham = 1
+        self.bayes = 0.86
+        
+    def return_body(self, mail, seperator):
+        parts, words = [], []
+        for part in mail.split('\n\n'):
+            parts.append(part)
+          # getting rid of e-mail header, where some elements resemble
+          # HTML syntax
+        del parts[0]
+            # Join all the strings in list
+        final_body = seperator.join(parts)    
+        return final_body
 
     def train(self, t_corpus):
         self.html_in_ham = 0
         self.html_in_spam = 0
-        if self.mail_is_spam == 1:
-            for name, email in t_corpus.emails():
-                if t_corpus.is_spam(name):
-                    self.mail_is_spam += 1
-                else:
-                    self.mail_is_ham += 1 
-        for name, email in t_corpus.emails():
-            words = []
-            for word in email.split():
-                words.append(word.lower())
-            for word in words:
+        for name, mail in t_corpus.emails():
+            separator = ' '
+            body = self.return_body(mail, separator)
+            for word in body.split():
                 if word.startswith('<') and word.endswith('>'):
                     if t_corpus.is_spam(name):
                         self.html_in_spam += 1
                     elif t_corpus.is_ham(name):
                         self.html_in_ham += 1
-        
-        if self.mail_is_ham + self.mail_is_ham > 0:
-            self.is_trained = True
+        self.bayes = self.html_in_spam / (self.html_in_spam + self.html_in_ham)
 
     def test(self, mail):
-        found = 0
-        words = []
-        for word in mail.split():
-            words.append(word.lower())
-        for word in words:
+        separator = ' '
+        body = self.return_body(mail, separator)
+        for word in body.split():
             if word.startswith('<') and word.endswith('>'):
-                '''Naive Bayes spam filtering method'''
-                return (self.html_in_spam * self.mail_is_spam) / \
-                (self.html_in_spam * self.mail_is_spam + self.html_in_ham \
-                * self.mail_is_ham)
+                return self.bayes
         return -1
         
 if __name__ == "__main__":
     
     a = HtmlFilter()
     c = TrainingCorpus('./1')
-    b = '<TABLE width=3D500> \
-  <TBODY> \
-  <TR>'
     a.train(c)
-    print(a.test(b))
+    print(a.html_in_ham)
+    print(a.html_in_spam)
     
