@@ -6,7 +6,7 @@ from trainingcorpus import TrainingCorpus
 import email.message
 
 class BlacklistFilter(BaseFilter):
-    """DETECTS MAIL ADRESSES THAT USUALLY SEND SPAMS"""
+    '''DETECTS MAIL ADRESSES THAT USUALLY SEND SPAMS.'''
     def __init__(self):
         BaseFilter.__init__(self)
         self.blacklist = set()
@@ -25,7 +25,7 @@ class BlacklistFilter(BaseFilter):
             return -1    # Can't tell
 
 class WhitelistFilter(BaseFilter):
-    """DETECTS MAIL ADRESSES THAT USUALLY SEND HAMS"""
+    '''DETECTS MAIL ADRESSES THAT USUALLY SEND HAMS.'''
     def __init__(self):
         BaseFilter.__init__(self)
         self.whitelist = set()
@@ -44,7 +44,7 @@ class WhitelistFilter(BaseFilter):
             return -1    # Can't tell
 
 class HtmlFilter(BaseFilter):
-    """DETECTS WHETER BODY CONTAINS HTML TAGS"""
+    '''DETECTS WHETER BODY CONTAINS HTML TAGS.'''
     def __init__(self):
         # default parameters, in case we didn't call the train function
         self.html_in_ham = 2
@@ -61,6 +61,7 @@ class HtmlFilter(BaseFilter):
         for name, mail in t_corpus.emails():
             body = self.return_body(mail)
             for word in body.split():
+                # html tags are simplyfied, no plain text includes <word>
                 if word.startswith('<') and word.endswith('>'):
                     if t_corpus.is_spam(name):
                         self.html_in_spam += 1
@@ -78,7 +79,7 @@ class HtmlFilter(BaseFilter):
         return -1
         
 class ReplyFilter(BaseFilter):
-    """FINDS MAILS THAT ARE REPLYS TO OUR MAIL"""
+    '''FINDS MAILS THAT ARE REPLYS TO OUR MAIL.'''
     def __init__(self):
         # default parameters, in case we didn't call the train function
         self.reply_in_ham = 0
@@ -111,7 +112,7 @@ class ReplyFilter(BaseFilter):
             return -1
             
 class SusReplyFilter(BaseFilter):
-    """DETECTS MAILS PRETENDING TO BE A REPLY"""
+    '''DETECTS MAILS PRETENDING TO BE A REPLY.'''
     def __init__(self):
         # default parameters, in case we didn't call the train function
         self.sus_reply_in_ham = 0
@@ -128,8 +129,10 @@ class SusReplyFilter(BaseFilter):
         for name, mail in t_corpus.emails():
             separator = ' '
             header = self.return_header(mail, separator)
+                # sorts out mails that genuinely are replys
             if header.find("In-Reply-To") != -1:
                 pass
+                # finds mails pretending to be a reply
             elif header.find("Reply-To") != -1:
                 if t_corpus.is_spam(name):
                     self.sus_reply_in_spam += 1
