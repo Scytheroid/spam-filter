@@ -13,6 +13,7 @@ class MyFilter:
         # initializing importance of our filters in case they don't let us
         # train them
         self.strong_filters = []
+        self.normal_filters = []
         self.word_filters = []
         self.init_filters()
 
@@ -22,6 +23,9 @@ class MyFilter:
         self.strong_filters.append(atomfilters.BlacklistFilter())
         # print("Initializing WhiteListFilter")
         self.strong_filters.append(atomfilters.WhitelistFilter())
+
+        # Initialize normal filters
+        self.normal_filters.append(atomfilters.HtmlFilter())
 
         # Initialize word filters
         for name, obj in inspect.getmembers(wordfilters):
@@ -33,8 +37,7 @@ class MyFilter:
     
     def train(self, dir_path):
         corpus = TrainingCorpus(dir_path)
-
-        for filt in self.strong_filters + self.word_filters:
+        for filt in self.strong_filters + self.normal_filters + self.word_filters:
             # print("Training " + filt.__class__.__name__)
             filt.train(corpus)
 
