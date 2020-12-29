@@ -74,11 +74,78 @@ class HtmlFilter(BaseFilter):
                 return self.bayes
         return -1
         
+class ReplyFilter(BaseFilter):
+    def __init__(self):
+        # default parameters, in case we didn't call the train function
+        self.reply_in_ham = 0
+        self.reply_in_spam = 0
+        self.bayes = 0.0
+        
+    def return_header(self, mail, seperator):
+        parts = []
+        for part in mail.split('\n\n'):
+            parts.append(part)
+        return parts[0]
+
+    def train(self, t_corpus):
+        for name, mail in t_corpus.emails():
+            separator = ' '
+            header = self.return_header(mail, separator)
+            if header.find("In-Reply-To") != -1:
+                if t_corpus.is_spam(name):
+                    self.reply_in_spam += 1
+                elif t_corpus.is_ham(name):
+                    self.reply_in_ham += 1
+        self.bayes = self.reply_in_spam / (self.reply_in_spam + self.reply_in_ham)
+
+    def test(self, mail):
+        separator = ' '
+        header = self.return_header(mail, separator)
+        if header.find("In-Reply-To") != -1:
+            return self.bayes
+        else:
+            return -1
+            
+class SusReplyFilter(BaseFilter):
+    def __init__(self):
+        # default parameters, in case we didn't call the train function
+        self.sus_reply_in_ham = 0
+        self.sus_reply_in_spam = 0
+        self.sus_bayes = 0.92
+        
+    def return_header(self, mail, seperator):
+        parts = []
+        for part in mail.split('\n\n'):
+            parts.append(part)
+        return parts[0]
+
+    def train(self, t_corpus):
+        for name, mail in t_corpus.emails():
+            separator = ' '
+            header = self.return_header(mail, separator)
+            if header.find("In-Reply-To") != -1:
+                pass
+            elif header.find("Reply-To") != -1:
+                if t_corpus.is_spam(name):
+                    self.sus_reply_in_spam += 1
+                elif t_corpus.is_ham(name):
+                    self.sus_reply_in_ham += 1
+        self.sus_bayes = self.sus_reply_in_spam / \
+            (self.sus_reply_in_spam + self.sus_reply_in_ham)
+
+    def test(self, mail):
+        separator = ' '
+        header = self.return_header(mail, separator)
+        if header.find("In-Reply-To") != -1:
+            return -1
+        elif header.find("Reply-To") != -1:
+            return self.sus_bayes
+        else:
+            return -1
+        
 if __name__ == "__main__":
     
-    a = HtmlFilter()
+    a = SusReplyFilter()
     c = TrainingCorpus('./1')
     a.train(c)
-    print(a.html_in_ham)
-    print(a.html_in_spam)
     

@@ -71,5 +71,4 @@ def test_atom_filter(initialized_filter, train_dir, test_dir):
                           matrix_dict['tn'], \
                           matrix_dict['fp'], \
                           matrix_dict['fn'])
-    
     return score
