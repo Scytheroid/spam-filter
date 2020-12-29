@@ -1,8 +1,7 @@
 import os
-from collections import Counter
 
 class BaseFilter:
-    """GIVES THE BASIS TO ALL FILTERS."""
+    '''GIVES THE BASIS TO ALL FILTERS.'''
     def __init__(self):
         self.is_trained = False
 
@@ -14,7 +13,7 @@ class BaseFilter:
         
 
 class WordFilter(BaseFilter):
-    """DETECTS HOW GIVEN WORD INFLUENCES FILTERS PROBABILITY OF BEING A SPAM."""
+    '''DETECTS HOW GIVEN WORD INFLUENCES FILTERS PROBABILITY OF BEING A SPAM.'''
     
     # called from atomfilters.py
     def __init__(self, word):
