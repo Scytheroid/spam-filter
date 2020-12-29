@@ -64,15 +64,15 @@ if __name__ == '__main__':
     train_dir = '1/'
     test_dir = '2/'
 
-    # filt = wordfilters.WinFilter()
-    # conf_matrix = quality.test_atom_filter(filt, train_dir, test_dir)
-    # print(conf_matrix)
+    filt = atomfilters.HtmlFilter()
+    conf_matrix = quality.test_atom_filter(filt, train_dir, test_dir)
+    print(conf_matrix)
 
-    filt = MyFilter()
-    filt.train(train_dir)
-    filt.test(test_dir)
-    score = quality.compute_quality_for_corpus(test_dir)
-    print("Score of {name} is {score:3.2f}".format(name=filt.__class__.__name__, score=score))
+    #filt = MyFilter()
+    #filt.train(train_dir)
+    #filt.test(test_dir)
+    #score = quality.compute_quality_for_corpus(test_dir)
+    #print("Score of {name} is {score:3.2f}".format(name=filt.__class__.__name__, score=score))
 
     # from quality import test_atom_filter
     # atom_filter = atomfilters.BlacklistFilter()

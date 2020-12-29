@@ -23,6 +23,7 @@ Received: from k100-51.bas1.dbn.dublin.eircom.net
 Subject: Re: [ILUG] SMTP auth & mutt
 From: Nick Murtagh <nickm@go2.ie>
 To: ilug@linux.ie
+Reply-To:
 In-Reply-To: <20020820111004.GD14073@jinny.ie>
 References: <20020820102914.GC12174@jinny.ie>
     <20020820120618.F4237@prodigy.Redbrick.DCU.IE>
