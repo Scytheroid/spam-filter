@@ -7,7 +7,88 @@ from basefilter import WordFilter
     # https://www.inc.com/geoffrey-james/how-to-avoid-a-spam-filter-5-rules.html
     
     # we use pre-calculated bayes in case train() wasn't called
-    
+
+
+class BestPriceFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'best price')
+ 
+class CashBonus(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'cash bonus')
+ 
+class FinancialFreedomFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'financial freedom')
+ 
+class ExtraCashFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'extra cash')
+ 
+class BecomeAMemberFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'become a member')
+ 
+class ActNowFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'act now')
+ 
+class GetItNowFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'get it now')
+ 
+class ExclusiveDealFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'exclusive deal')
+ 
+class PleaseReadFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'please read')
+ 
+class OrderNowFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'order now')
+ 
+class PleaseReadFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'please read')
+ 
+class SeeForYourselfFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'see for yourself')
+ 
+class YouHaveBeenSelectedFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'you have been selected')
+ 
+class AcceptCreditCardsFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'accept credit cards')
+ 
+class TermsAndConditionsFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'terms and conditions')
+ 
+class UnlimitedFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'unlimited')
+ 
+class WarrantyFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'warranty')
+ 
+class WorkFromHomeFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'work from home')
+ 
+class NoPurchaseNecessaryFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'no purchase necessary')
+ 
+class SocialSecurityNumberFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'social security number')
+
 class CostFilter(WordFilter):
     def __init__(self):
         WordFilter.__init__(self, 'cost')
