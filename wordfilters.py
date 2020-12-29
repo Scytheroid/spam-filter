@@ -11,6 +11,34 @@ class PercentFilter(WordFilter):
 class BuyFilter(WordFilter):
     def __init__(self):
         WordFilter.__init__(self, 'buy')
+                
+class Game(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'game')
+        
+class Play(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'play')
+                
+class CassinoFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'cassino')
+        
+class BankAccountFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'bank account')
+        
+class OccasionFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'occasion')
+        
+class PayFilter(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'pay')
+        
+class Password(WordFilter):
+    def __init__(self):
+        WordFilter.__init__(self, 'password')
 
 class InheritFilter(WordFilter):
     def __init__(self):
