@@ -48,7 +48,7 @@ class HtmlFilter(BaseFilter):
         self.html_in_spam = 8
         self.bayes = 0.86
         
-    def return_body(self, mail, seperator):
+    def return_body(self, mail):
         body = email.message_from_string(mail).get_payload()
         return body
 
@@ -56,19 +56,19 @@ class HtmlFilter(BaseFilter):
         self.html_in_ham = 0
         self.html_in_spam = 0
         for name, mail in t_corpus.emails():
-            separator = ' '
-            body = self.return_body(mail, separator)
+            body = self.return_body(mail)
             for word in body.split():
                 if word.startswith('<') and word.endswith('>'):
                     if t_corpus.is_spam(name):
                         self.html_in_spam += 1
                     elif t_corpus.is_ham(name):
                         self.html_in_ham += 1
-        self.bayes = self.html_in_spam / (self.html_in_spam + self.html_in_ham)
+        if self.html_in_ham + self.html_in_spam > 0:
+            self.is_trained = True
+            self.bayes = self.html_in_spam / (self.html_in_spam + self.html_in_ham)
 
     def test(self, mail):
-        separator = ' '
-        body = self.return_body(mail, separator)
+        body = self.return_body(mail)
         for word in body.split():
             if word.startswith('<') and word.endswith('>'):
                 return self.bayes
