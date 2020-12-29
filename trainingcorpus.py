@@ -3,6 +3,7 @@ from utils import read_only, read_classification_from_file
 from constants import POSITIVE, NEGATIVE, TRUTHFILE, PREDFILE
 
 class TrainingCorpus(Corpus):
+    '''HELPS US WITH TRAINING FILTERS.'''
     def __init__(self, path_to_mails):
         Corpus.__init__(self, path_to_mails)
         
